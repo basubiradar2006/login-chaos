@@ -1,194 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LOGIN.exe</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOLUME.exe</title>
 <style>
-:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* ===== THEME ===== */
+:root{--pink:#ff2bd6;--blue:#2bd9ff;--purple:#9b5cff;--green:#39ff88;--bg:#07040f;--panel:#110a22}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:#090616;color:#f1eeff;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
-#root{min-height:100dvh}
-.app{position:relative;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:64px 16px 40px;overflow:hidden;background:radial-gradient(900px 600px at 15% 10%,#4c1d95aa,transparent),radial-gradient(800px 600px at 90% 90%,#0ea5e9aa,transparent),#090616}
-.app.shake{animation:shake .15s infinite}
-@keyframes shake{0%{transform:translate(6px,3px)}25%{transform:translate(-6px,-4px)}50%{transform:translate(5px,-5px)}75%{transform:translate(-5px,4px)}100%{transform:translate(3px,-3px)}}
-.top{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;z-index:20}
-.pill{background:#ffffff14;border:1px solid #ffffff2e;color:#fff;padding:8px 14px;border-radius:99px;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(10px)}
-.pill:hover{background:#ffffff26}
-.card{position:relative;width:min(100%,400px);padding:30px 26px 26px;border-radius:24px;background:linear-gradient(145deg,#ffffff1f,#ffffff08);border:1px solid #ffffff33;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 20px 60px #0008,0 0 80px #7c3aed44}
-.logo{display:flex;align-items:center;justify-content:center;gap:10px;font-size:30px;font-weight:800;letter-spacing:-.5px;cursor:pointer;user-select:none;position:relative}
-.logo b{background:linear-gradient(90deg,#a78bfa,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.logo span.e{display:inline-block;animation:bob 2.4s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-4px) rotate(8deg)}}
-.say{position:absolute;top:-38px;left:50%;transform:translateX(-50%);background:#fff;color:#111;font-size:13px;font-weight:700;padding:6px 12px;border-radius:12px;white-space:nowrap;animation:pop .3s}
-.tag{text-align:center;color:#c4b5fd;font-size:13px;margin:6px 0 22px}
-label{display:block;font-size:12px;color:#b8b0d8;margin:0 0 6px 2px;letter-spacing:.4px;text-transform:uppercase}
-input{width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2e;background:#0b0820aa;color:#fff;font-size:16px;outline:none;margin-bottom:6px;transition:.2s}
-input:focus{border-color:#38bdf8;box-shadow:0 0 0 3px #38bdf833}
-.tip{min-height:20px;font-size:12px;color:#7dd3fc;margin:0 0 8px 2px}
-.links{display:flex;justify-content:space-between;font-size:13px;margin:2px 2px 16px}
-.links a{color:#93c5fd;text-decoration:none}.links a:hover{text-decoration:underline}
-.slot{height:54px}
-.go{width:100%;height:54px;border:0;border-radius:14px;font-size:16px;font-weight:800;color:#fff;cursor:pointer;background:linear-gradient(90deg,#7c3aed,#2563eb 60%,#06b6d4);box-shadow:0 8px 24px #4f46e577;transition:left .25s cubic-bezier(.3,1.6,.5,1),top .25s cubic-bezier(.3,1.6,.5,1),transform .15s;z-index:5}
-.go:active{transform:scale(.95)}
-.go.moved{position:absolute;width:150px}
-.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px;max-width:560px}
-.cb{position:relative;overflow:hidden;padding:11px 14px;border-radius:12px;border:2px solid #ffffff44;background:#ffffff10;color:#fff;font-weight:800;font-size:12px;cursor:pointer;transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .2s;backdrop-filter:blur(8px)}
-.cb:hover{background:#ffffff24}
-.cb.d{border-color:#f472b6}.cb.w{border-color:#fbbf24;color:#fde68a}.cb.m{border-color:#34d399}
-.cb i{position:absolute;left:0;bottom:0;height:4px;background:#34d399;animation:bar 2.2s linear forwards}
-@keyframes bar{from{width:0}to{width:100%}}
-.ach{margin-top:14px;font-size:13px;color:#fde68a;min-height:20px}
-.ov{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;background:#050212cc;backdrop-filter:blur(4px)}
-.pop{width:min(92vw,380px);background:#fff;color:#1a1033;border:4px solid #1a1033;border-radius:22px;box-shadow:8px 8px 0 #7c3aed;padding:22px;text-align:center;animation:pop .45s cubic-bezier(.3,1.7,.5,1)}
-.pop .pe{font-size:56px}.pop h3{margin:8px 0 16px;font-size:20px;line-height:1.25}
-.pop button,.big button{border:3px solid #1a1033;background:#fde047;color:#1a1033;font-weight:900;padding:10px 22px;border-radius:14px;cursor:pointer;box-shadow:3px 3px 0 #1a1033;font-size:15px}
-@keyframes pop{from{transform:scale(.3) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
-.toasts{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;z-index:70;width:min(92vw,420px);pointer-events:none}
-.toast{background:#1e1b4bf2;border:1px solid #a78bfa88;padding:12px 16px;border-radius:14px;font-weight:700;font-size:14px;text-align:center;animation:pop .35s cubic-bezier(.3,1.6,.5,1);box-shadow:0 8px 24px #0008}
-.fl{position:fixed;font-size:30px;pointer-events:none;z-index:40;animation:fl 2.6s ease-out forwards}
-@keyframes fl{from{opacity:1;transform:translateY(0) scale(.6)}to{opacity:0;transform:translateY(-140px) scale(1.4) rotate(25deg)}}
-.big{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:18px;background:radial-gradient(700px 500px at 50% 30%,#6d28d9,#0b0526);overflow:hidden}
-.big h1{font-size:clamp(24px,5vw,44px);margin:0;max-width:760px;line-height:1.15;animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
-.big p{margin:0;color:#bae6fd;font-size:16px;max-width:560px}
-.conf{position:absolute;top:-40px;animation:fall linear forwards;font-size:26px}
-@keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
-.lb{width:min(86vw,420px);height:16px;border-radius:99px;background:#ffffff22;overflow:hidden;border:2px solid #fff4}
-.lb div{height:100%;background:linear-gradient(90deg,#a78bfa,#38bdf8);transition:width 1s ease}
-.adm{position:fixed;z-index:30;padding:9px 12px;border:2px dashed #f87171;background:#450a0acc;color:#fecaca;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;animation:pop .4s}
-.hint{margin-top:18px;font-size:12px;color:#8f86b8;text-align:center}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#1d0f3d,var(--bg) 60%);color:var(--blue);font-family:"Courier New",monospace;padding:14px;transition:transform .6s,filter .3s}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+body.flip{transform:rotate(180deg)} body.invert{filter:invert(1) hue-rotate(180deg)}
+body.siren{animation:siren .4s infinite}
+@keyframes siren{0%{box-shadow:inset 0 0 120px red}50%{box-shadow:inset 0 0 120px blue}}
+.wrap{max-width:1000px;margin:auto}
+header{text-align:center;margin-bottom:12px}
+h1{margin:0;font-size:clamp(2rem,8vw,4rem);color:var(--pink);text-shadow:0 0 12px var(--pink),0 0 30px var(--purple);position:relative;display:inline-block;animation:glitch 3s infinite}
+h1::before,h1::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+h1::before{color:var(--blue);animation:g1 2.2s infinite;clip-path:inset(0 0 55% 0)}
+h1::after{color:var(--green);animation:g1 1.7s infinite reverse;clip-path:inset(55% 0 0 0)}
+@keyframes g1{0%,90%{transform:translate(0)}92%{transform:translate(-4px,1px)}95%{transform:translate(4px,-1px)}100%{transform:translate(0)}}
+@keyframes glitch{0%,94%,100%{transform:none}96%{transform:skewX(8deg)}98%{transform:skewX(-8deg)}}
+.sub{letter-spacing:.2em;font-size:.8rem;color:var(--green)}
+.notice{border:1px dashed var(--green);color:var(--green);padding:8px;margin:10px 0;font-size:.8rem;text-align:center;background:#0a1a10}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:2px solid var(--purple);border-radius:10px;padding:14px;margin-bottom:14px;box-shadow:0 0 18px rgba(155,92,255,.4);animation:border 4s infinite linear}
+@keyframes border{0%,100%{border-color:var(--purple)}33%{border-color:var(--pink)}66%{border-color:var(--blue)}}
+.panel h2{margin:0 0 10px;font-size:.85rem;color:var(--pink);letter-spacing:.15em}
+/* ===== BUTTONS ===== */
+button{font:inherit;cursor:pointer;color:#fff;background:#1a0f33;border:1px solid var(--blue);padding:9px 12px;border-radius:6px;box-shadow:0 0 8px var(--blue);transition:.2s;margin:3px}
+button:hover{background:var(--blue);color:#000;box-shadow:0 0 20px var(--blue);transform:translateY(-2px)}
+button.hot{border-color:var(--pink);box-shadow:0 0 8px var(--pink)} button.hot:hover{background:var(--pink)}
+button.on{background:var(--green);color:#000}
+/* ===== DISPLAY ===== */
+.dial{position:relative;width:240px;height:240px;margin:auto}
+.dial svg{transform:rotate(-90deg)}
+.dial circle{fill:none;stroke-width:16}
+#ring{stroke:var(--pink);stroke-linecap:round;filter:drop-shadow(0 0 8px var(--pink));transition:stroke-dashoffset .5s}
+.dial .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#pct{font-size:3.6rem;color:#fff;text-shadow:0 0 14px var(--blue)}
+#emo{font-size:2rem}
+#state{text-align:center;color:var(--green);min-height:1.4em;margin:6px 0}
+.bars{display:flex;gap:3px;height:46px;align-items:flex-end;margin:10px 0}
+.bars i{flex:1;background:var(--green);opacity:.15;border-radius:2px;height:100%}
+.bars i.lit{opacity:1;box-shadow:0 0 6px currentColor}
+input[type=range]{width:100%;accent-color:var(--pink);height:34px}
+.row{text-align:center}
+/* ===== STATUS + TERMINAL ===== */
+.stat{display:flex;align-items:center;gap:8px;font-size:.8rem;margin:5px 0}
+.stat .b{flex:1;height:10px;background:#000;border:1px solid var(--blue)}
+.stat .b div{height:100%;background:linear-gradient(90deg,var(--green),var(--pink));width:50%;transition:width .4s}
+#term{height:190px;overflow:auto;background:#000;border:1px solid var(--green);color:var(--green);padding:8px;font-size:.75rem}
+#term div{margin:2px 0}
+/* ===== MODAL / LOADING ===== */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:50;padding:14px}
+.box{position:relative;background:var(--panel);border:3px solid var(--pink);padding:22px;max-width:460px;width:100%;text-align:center;box-shadow:0 0 40px var(--pink);animation:pop .25s;min-height:170px;overflow:hidden}
+@keyframes pop{from{transform:scale(.5) rotate(-5deg);opacity:0}}
+.box h3{color:var(--pink);margin-top:0}
+.bar{height:12px;border:1px solid var(--green);margin-top:14px}.bar div{height:100%;background:var(--green);width:0}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-10px) rotate(-2deg)}75%{transform:translateX(10px) rotate(2deg)}}
+#dnc{position:relative}
 </style>
 </head>
 <body>
-<div id="root"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<div class="wrap">
+<header>
+  <h1 data-t="VOLUME.exe">VOLUME.exe</h1>
+  <div class="sub">THE WORLD'S LEAST CONVENIENT AUDIO UTILITY</div>
+</header>
+<div class="notice">⚠ This app only controls the audio playing inside THIS web page. It does NOT touch your computer's master/system volume. (Your speakers are safe. Probably.)</div>
+
+<div class="grid">
+<section>
+  <div class="panel">
+    <h2>▶ MAIN VOLUME CORE</h2>
+    <div class="dial">
+      <svg width="240" height="240" viewBox="0 0 240 240"><circle cx="120" cy="120" r="90" stroke="#1d1238"/><circle id="ring" cx="120" cy="120" r="90" stroke-dasharray="565.5" stroke-dashoffset="565"/></svg>
+      <div class="num"><div id="pct">30</div><div id="emo">😐</div></div>
+    </div>
+    <div id="state"></div>
+    <div class="bars" id="bars"></div>
+    <input type="range" id="slider" min="0" max="100" value="30" aria-label="Volume slider">
+    <div class="row">
+      <button id="power" class="hot">⏻ POWER ON SPEAKERS</button>
+      <button id="down">− DECREASE</button><button id="up">+ INCREASE</button>
+      <button id="mute">🔇 MUTE</button><button id="reset">↺ RESET</button>
+      <button id="rev" class="hot">⇄ REVERSE REALITY: OFF</button>
+      <button id="lotto" class="hot">🎰 VOLUME LOTTERY</button>
+    </div>
+  </div>
+  <div class="panel">
+    <h2>☠ USELESS BUTTONS</h2>
+    <div class="row" id="useless">
+      <button id="dnc" class="hot">DO NOT CLICK ME</button>
+      <button id="sd">SERIOUSLY DON'T</button>
+      <button id="free">FREE VOLUME</button>
+      <button id="louder">MAKE IT LOUDER</button>
+      <button id="fix">FIX EVERYTHING</button>
+      <button id="emerg" class="hot">EMERGENCY BUTTON</button>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="panel">
+    <h2>⚙ SYSTEM STATUS (ALL FAKE)</h2>
+    <div class="stat">CPU&nbsp;&nbsp;<div class="b"><div id="cpu"></div></div><span id="cpuT"></span></div>
+    <div class="stat">SPK L<div class="b"><div id="spl"></div></div></div>
+    <div class="stat">SPK R<div class="b"><div id="spr"></div></div></div>
+    <div class="stat">SPEAKER MOOD <span id="mood" style="color:var(--pink)"></span></div>
+    <div class="stat">AUDIO ENGINE <span id="eng" style="color:var(--pink)">OFFLINE</span></div>
+  </div>
+  <div class="panel">
+    <h2>&gt;_ FAKE TERMINAL</h2>
+    <div id="term"></div>
+  </div>
+</section>
+</div>
+</div>
+
 <script>
-const {useState,useEffect,useRef}=React;
-const html=htm.bind(React.createElement);
-const pick=a=>a[Math.floor(Math.random()*a.length)];
-const EM=['🎉','😂','💀','🤡','🎊','🥳','🤪','🔥','💩','🦄'];
-const LAUGH=['😂','🤣','😹','😆','🤪','💀'];
+/* ================= STATE ================= */
+const $ = id => document.getElementById(id);
+const rnd = (a,b) => Math.floor(Math.random()*(b-a+1))+a;
+const pick = a => a[rnd(0,a.length-1)];
+const sleep = ms => new Promise(r => setTimeout(r,ms));
+let vol = 30, muted = false, reversed = false, ctx = null, master = null, step = 0, timer = null, busy = false;
 
-/* ---------- browser-generated sound effects ---------- */
-let AC=null,soundOn=true;
-const ctx=()=>{if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC};
-function tone(f,d,type='sine',t0=0,vol=.12,f2){const a=ctx();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t=a.currentTime+t0;o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.03)}
-const S={
- escape:()=>{for(let i=0;i<8;i++)tone(260+(i%2)*160+i*30,.06,'square',i*.045,.07)},
- escape2:()=>{tone(1100,.45,'sawtooth',0,.07,180);tone(180,.2,'square',.4,.08,500)},
- click:()=>tone(540,.08,'triangle',0,.12),
- laugh:()=>{for(let i=0;i<8;i++)tone(430-i*18+(i%2)*60,.1,'sawtooth',i*.12,.08,260)},
- fail:()=>[420,350,280,170].forEach((f,i)=>tone(f,.25,'sawtooth',i*.2,.09,f*.8)),
- win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.14,'square',i*.09,.09)),
- boing:()=>{tone(120,.55,'sine',0,.3,520);tone(520,.4,'sine',.1,.1,200)},
- warn:()=>{for(let i=0;i<6;i++)tone(i%2?330:480,.16,'sawtooth',i*.17,.09)},
- error:()=>{tone(130,.18,'square',0,.12);tone(110,.3,'square',.22,.12)},
- victory:()=>{[523,523,523,659,784,659,784,1047,1319].forEach((f,i)=>tone(f,.16,'square',i*.12,.08));tone(1568,.6,'triangle',1.1,.12)}
-};
-const play=n=>{if(soundOn)try{S[n]()}catch(e){}};
-
-const LOAD=[[25,'Verifying your existence...'],[47,'Checking your brain cells...'],[89,'Searching for common sense...'],[100,'Login complete...']];
-const KEYS=['success','c0','c1','c2','c3','c4','c5','logo','forgot','signup','admin'];
-
-function App({reset}){
- const [sound,setSound]=useState(true),[si,setSi]=useState(0),[pos,setPos]=useState(null),[pop,setPop]=useState(null);
- const [toasts,setToasts]=useState([]),[seen,setSeen]=useState({}),[fx,setFx]=useState(null),[step,setStep]=useState(0);
- const [shake,setShake]=useState(false),[floats,setFloats]=useState([]),[tip,setTip]=useState({}),[admin,setAdmin]=useState(null);
- const [rot,setRot]=useState({r:0,x:0,y:0}),[logoN,setLogoN]=useState(0),[say,setSay]=useState(''),[uc,setUc]=useState(0);
- const [money,setMoney]=useState(0),[final,setFinal]=useState(false);
- const card=useRef(),btn=useRef(),adm=useRef(0),ach=useRef(0),conf=useRef(Array.from({length:70},()=>({l:Math.random()*100,d:Math.random()*1.6,t:2.2+Math.random()*2,e:pick(EM)})));
- useEffect(()=>{soundOn=sound},[sound]);
- const mark=k=>setSeen(s=>s[k]?s:{...s,[k]:1});
- const toast=(m,snd)=>{if(snd)play(snd);const id=Math.random();setToasts(t=>[...t.slice(-2),{id,m}]);setTimeout(()=>setToasts(t=>t.filter(x=>x.id!==id)),2800)};
- const talk=(e,m,snd)=>{if(snd)play(snd);setPop({e,m})};
- const addFloats=a=>{setFloats(f=>[...f,...a]);setTimeout(()=>setFloats(f=>f.filter(x=>!a.includes(x))),3000)};
- const burst=()=>addFloats(Array.from({length:20},()=>({id:Math.random(),l:Math.random()*92+'%',t:Math.random()*80+10+'%',e:pick(LAUGH)})));
-
- // timers: 30s idle jab, roaming admin button
- useEffect(()=>{const t=setTimeout(()=>talk('🙄','Are you still here? Get a life. 😂','laugh'),30000);return()=>clearTimeout(t)},[]);
- useEffect(()=>{let t;const show=()=>{if(adm.current)return;setAdmin({x:8+Math.random()*68,y:12+Math.random()*72});t=setTimeout(()=>{setAdmin(null);t=setTimeout(show,5000+Math.random()*7000)},7000)};t=setTimeout(show,9000+Math.random()*6000);return()=>clearTimeout(t)},[]);
- // fake login flow
- useEffect(()=>{
-  if(fx==='confetti'){const t=setTimeout(()=>setFx('load'),3800);return()=>clearTimeout(t)}
-  if(fx==='load'){let i=0;setStep(0);const t=setInterval(()=>{i++;if(i>=4){clearInterval(t);setTimeout(()=>{setFx('welcome');play('win')},800)}else{setStep(i);play('click')}},1200);return()=>clearInterval(t)}
- },[fx]);
- // achievements + finale
- useEffect(()=>{
-  if([0,1,2,3,4,5].every(i=>seen['c'+i])&&!ach.current){ach.current=1;setTimeout(()=>talk('🏆','ACHIEVEMENT UNLOCKED: Professional Button Clicker. Your parents must be proud.','win'),1500)}
-  if(KEYS.every(k=>seen[k])&&!final){const t=setTimeout(()=>{play('victory');setFinal(true)},4000);return()=>clearTimeout(t)}
- },[seen]);
-
- const moveBtn=()=>{const c=card.current,b=btn.current;if(!c||!b)return;setPos({x:Math.random()*(c.clientWidth-150),y:Math.random()*(c.clientHeight-b.offsetHeight)})};
- const signIn=()=>{ctx();const n=si+1;setSi(n);
-  if(n===1){play('escape');moveBtn();toast('Too slow! 😂')}
-  else if(n===2){play('escape2');moveBtn();toast('You really thought you could catch me? 💀')}
-  else if(n===3){mark('success');setFx('confetti');play('win');setTimeout(()=>play('victory'),500)}
-  else if(n===10){talk('🥴','You are officially unemployed in the art of clicking.','fail')}
-  else toast(pick(['Failed login. Again. Somehow.','Nothing here. Still nothing. 🫠','The server is on vacation. We have no server.']),'fail')};
- const logo=()=>{play('click');const n=logoN+1;setLogoN(n);setSay('Stop staring at me!');setTimeout(()=>setSay(''),1400);
-  if(n===5){mark('logo');talk('🕵️','SECRET UNLOCKED: The logo is also tired of you.','win')}};
- const chaos=[
-  ['DON’T CLICK ME','',()=>{play('click');setTimeout(()=>{burst();talk('🤣','I TOLD YOU NOT TO CLICK ME!','laugh')},1000)}],
-  ['SERIOUSLY DON’T','d',()=>talk('🤦','Why are humans like this?','fail')],
-  ['LAST WARNING','w',()=>{setShake(true);setTimeout(()=>setShake(false),900);talk('🚨','WARNING! YOUR CURIOSITY IS TOO HIGH.','warn')}],
-  ['I’M USELESS','',()=>{play('click');const n=uc+1;setUc(n);if(n>=5)toast('Still trying? Respect. 🫡')}],
-  ['TOUCH ME IF YOU DARE','d',()=>{play('boing');setRot({r:Math.random()*720-360,x:Math.random()*80-40,y:Math.random()*40-20})}],
-  ['FREE MONEY (NOT REALLY)','m',()=>{if(money)return;play('click');setMoney(1);setTimeout(()=>{setMoney(0);talk('💸','You received ₹0. Congratulations!','error')},2300)}]
- ];
- const fld=(k,m)=>{setTip({k,m});mark(k)};
- const links=(k,e,m)=>ev=>{ev.preventDefault();mark(k);talk(e,m,'error')};
- const mv=ev=>{if(Math.random()<.03)addFloats([{id:Math.random(),l:ev.clientX+'px',t:ev.clientY+'px',e:pick(['✨','😂','💜','🤡','🫠','💀','🎈'])}])};
-
- return html`<div className=${'app'+(shake?' shake':'')} onPointerMove=${mv}>
-  <div className="top">
-   <button className="pill" onClick=${()=>{ctx();setSound(!sound);if(!sound){soundOn=true;S.click()}}}>${sound?'🔊 Sound ON':'🔇 Sound OFF'}</button>
-   <button className="pill" onClick=${reset}>♻️ Reset Chaos</button>
-  </div>
-  <div className="card" ref=${card}>
-   <div className="logo" onClick=${logo}>${say&&html`<div className="say">${say}</div>`}<span className="e">🔐</span><span>LOGIN<b>.exe</b></span></div>
-   <div className="tag">Your identity is important. We don’t care.</div>
-   <label>Username</label>
-   <input type="text" placeholder="your name (or not)" autoComplete="off" onFocus=${()=>{fld('user','Who are you pretending to be?')}} onClick=${()=>{ctx();setTip({k:'user',m:'Who are you pretending to be?'})}}/>
-   <div className="tip">${tip.k==='user'?tip.m:''}</div>
-   <label>Password</label>
-   <input type="password" placeholder="••••••••" autoComplete="off" onFocus=${()=>fld('pass','Your secrets are safe. We don’t even have a server.')} onClick=${()=>{ctx();setTip({k:'pass',m:'Your secrets are safe. We don’t even have a server.'})}}/>
-   <div className="tip">${tip.k==='pass'?tip.m:''}</div>
-   <div className="links">
-    <a href="#" onClick=${links('forgot','🧠','Even we forgot your password.')}>Forgot Password?</a>
-    <a href="#" onClick=${links('signup','🚪','Registration is currently unavailable because nobody wants to join us.')}>Sign Up</a>
-   </div>
-   <div className="slot"><button ref=${btn} className=${'go'+(pos?' moved':'')} style=${pos?{left:pos.x,top:pos.y}:null} onClick=${signIn}>Sign In</button></div>
-  </div>
-  <div className="row">
-   ${chaos.map((c,i)=>html`<button key=${i} className=${'cb '+c[1]} style=${i===4?{transform:`translate(${rot.x}px,${rot.y}px) rotate(${rot.r}deg)`}:null} onClick=${()=>{ctx();mark('c'+i);c[2]()}}>${i===5&&money?'Loading… 💸':c[0]}${i===5&&money?html`<i/>`:null}</button>`)}
-  </div>
-  <div className="ach">${KEYS.filter(k=>seen[k]).length>0?`Chaos explored: ${KEYS.filter(k=>seen[k]).length}/${KEYS.length}`:''}</div>
-  <div className="hint">No server. No database. No dignity.</div>
-
-  ${floats.map(f=>html`<div key=${f.id} className="fl" style=${{left:f.l,top:f.t}}>${f.e}</div>`)}
-  ${admin&&html`<button className="adm" style=${{left:admin.x+'%',top:admin.y+'%'}} onClick=${()=>{ctx();adm.current=1;setAdmin(null);mark('admin');talk('🫥','Access denied. Even the admin is confused.','error')}}>I AM THE ADMIN</button>`}
-  <div className="toasts">${toasts.map(t=>html`<div key=${t.id} className="toast">${t.m}</div>`)}</div>
-  ${pop&&html`<div className="ov" onClick=${()=>setPop(null)}><div className="pop" onClick=${e=>e.stopPropagation()}><div className="pe">${pop.e}</div><h3>${pop.m}</h3><button onClick=${()=>{play('click');setPop(null)}}>OK, FINE</button></div></div>`}
-
-  ${fx&&html`<div className="big" style=${{zIndex:80}}>
-   ${fx==='confetti'&&html`<${React.Fragment}>${conf.current.map((c,i)=>html`<span key=${i} className="conf" style=${{left:c.l+'%',animationDelay:c.d+'s',animationDuration:c.t+'s'}}>${c.e}</span>`)}
-    <div style=${{fontSize:72}}>🥳🤡🎉</div><h1>CONGRATULATIONS! You have successfully logged into absolutely nothing!</h1><//>`}
-   ${fx==='load'&&html`<${React.Fragment}><div style=${{fontSize:56}}>⏳</div><h1>${LOAD[step][1]} ${LOAD[step][0]}%</h1><div className="lb"><div style=${{width:LOAD[step][0]+'%'}}/></div><//>`}
-   ${fx==='welcome'&&html`<${React.Fragment}><div style=${{fontSize:64}}>🫡</div><h1>Welcome! We don’t know who you are, but enjoy your stay.</h1><button onClick=${()=>{play('click');setFx(null)}}>Continue being confused</button><//>`}
-  </div>`}
-
-  ${final&&html`<div className="big" style=${{zIndex:100,background:'#05020f'}}>
-   <div style=${{fontSize:64}}>🪦⏳</div>
-   <h1>THANK YOU FOR WASTING YOUR PRECIOUS TIME HERE.</h1>
-   <p>Project LOGIN.exe — Successfully failed to serve humanity.</p>
-   <button onClick=${()=>{play('boing');reset()}}>RESTART MY BAD DECISIONS</button>
-  </div>`}
- </div>`;
+/* ================= TERMINAL ================= */
+function log(msg){
+  const d = document.createElement('div');
+  d.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  $('term').appendChild(d);
+  while ($('term').children.length > 60) $('term').firstChild.remove();
+  $('term').scrollTop = 1e9;
 }
-function Root(){const [k,setK]=useState(0);return html`<${App} key=${k} reset=${()=>setK(k+1)}/>`}
-ReactDOM.createRoot(document.getElementById('root')).render(html`<${Root}/>`);
+
+/* ================= AUDIO (Web Audio API) ================= */
+// A looping synthwave arpeggio. Master gain = our "volume".
+function startAudio(){
+  if (ctx) return;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  master = ctx.createGain(); master.connect(ctx.destination);
+  applyGain();
+  const notes = [220,262,330,392,330,262,196,247,294,370,294,247];
+  timer = setInterval(() => {
+    if (ctx.state === 'suspended') ctx.resume();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = step % 4 === 0 ? 'sawtooth' : 'square';
+    o.frequency.value = notes[step++ % notes.length] * (step % 24 < 12 ? 1 : 2);
+    g.gain.setValueAtTime(.4, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + .25);
+    o.connect(g); g.connect(master); o.start(); o.stop(ctx.currentTime + .26);
+  }, 230);
+  $('eng').textContent = 'ONLINE (BARELY)'; $('power').textContent = '⏻ SPEAKERS ON';
+  $('power').classList.add('on'); log('Audio engine started. Please stand by for beeps.');
+}
+function applyGain(){
+  if (master) master.gain.setTargetAtTime(muted ? 0 : Math.pow(vol/100, 2) * .6, ctx.currentTime, .05);
+}
+function siren(sec){ // quick two-tone siren using the same engine
+  if (!ctx) return;
+  const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sawtooth';
+  g.gain.value = .25 * Math.pow(vol/100,2); o.connect(g); g.connect(ctx.destination);
+  for (let i=0;i<sec*4;i++) o.frequency.setValueAtTime(i%2?600:900, ctx.currentTime + i*.25);
+  o.start(); o.stop(ctx.currentTime + sec);
+}
+
+/* ================= DISPLAY ================= */
+const bars = $('bars');
+for (let i=0;i<24;i++) bars.appendChild(document.createElement('i'));
+const states = [
+  [0,'😶','SILENT. SUSPICIOUSLY SILENT.','Dead inside'],
+  [15,'😴','Whisper mode. The speakers are napping.','Sleepy'],
+  [35,'😐','Perfectly average. Disgusting.','Meh'],
+  [55,'🙂','Pleasantly audible. Nobody is happy.','Content'],
+  [75,'😬','Neighbours are taking notes.','Anxious'],
+  [90,'😱','Speakers are filing a complaint.','Terrified'],
+  [100,'💀','MAXIMUM. Speakers have left the building.','Deceased']
+];
+function render(){
+  $('pct').textContent = vol;
+  $('ring').style.strokeDashoffset = 565.5 * (1 - vol/100);
+  const s = [...states].reverse().find(x => vol >= x[0]);
+  $('emo').textContent = muted ? '🤐' : s[1];
+  $('state').textContent = muted ? 'MUTED. Speakers are enjoying the silence.' : s[2];
+  $('mood').textContent = muted ? 'Gagged' : s[3];
+  [...bars.children].forEach((b,i) => b.classList.toggle('lit', !muted && i < vol/100*24));
+  $('slider').value = reversed ? 100 - vol : vol;
+  applyGain();
+}
+function setVol(v){ vol = Math.max(0, Math.min(100, Math.round(v))); render(); log(`Volume set to ${vol}%`); }
+
+/* ================= POPUP HELPERS ================= */
+// Generic modal. buttons = [{t, fn, cls}]. Returns the box element.
+function modal(title, body, buttons=[{t:'OK'}]){
+  const ov = document.createElement('div'); ov.className = 'ov';
+  const box = document.createElement('div'); box.className = 'box';
+  box.innerHTML = `<h3>${title}</h3><p>${body}</p>`;
+  buttons.forEach(b => {
+    const el = document.createElement('button'); el.textContent = b.t; if (b.cls) el.className = b.cls;
+    el.onclick = () => { ov.remove(); b.fn && b.fn(); };
+    box.appendChild(el);
+  });
+  ov.appendChild(box); document.body.appendChild(ov); return box;
+}
+// "Are you sure?" – the No button likes to run away
+function confirmQ(){
+  return new Promise(res => {
+    const box = modal('🔊 CONFIRMATION REQUIRED','Are you absolutely sure? Your speakers have feelings.',
+      [{t:'YES',fn:()=>res(true)},{t:'NO',fn:()=>res(false)}]);
+    const no = box.querySelectorAll('button')[1];
+    no.style.position = 'relative';
+    const dodge = () => {
+      if (Math.random() < .65){
+        no.style.left = rnd(-120,120)+'px'; no.style.top = rnd(-60,60)+'px';
+        no.textContent = pick(['NO','nope?','catch me','NO!!','too slow','😏']);
+      }
+    };
+    no.addEventListener('mouseenter', dodge); no.addEventListener('touchstart', dodge);
+  });
+}
+// Fake loading sequence
+async function loading(){
+  const msgs = ['Negotiating with speakers...','Asking sound waves for permission...','Calculating emotional damage...','Volume approved by absolutely nobody.'];
+  const ov = document.createElement('div'); ov.className = 'ov';
+  ov.innerHTML = '<div class="box"><h3>⏳ PLEASE WAIT</h3><p id="lm"></p><div class="bar"><div id="lb"></div></div></div>';
+  document.body.appendChild(ov);
+  for (let i=0;i<msgs.length;i++){
+    $('lm').textContent = msgs[i]; $('lb').style.width = ((i+1)*25)+'%'; log(msgs[i]);
+    await sleep(rnd(500,900));
+  }
+  ov.remove();
+}
+// Volume police
+function police(){
+  document.body.classList.add('siren'); siren(2);
+  log('🚨 VOLUME POLICE DISPATCHED');
+  modal('🚨 VOLUME POLICE 🚨',
+    'FREEZE! You are attempting 100% volume without a Loudness Licence. Officer Decibel has been notified. Please step away from the slider with your hands visible.',
+    [{t:'I SURRENDER (cap at 99)',fn:()=>{document.body.classList.remove('siren');setVol(99)}},
+     {t:'BRIBE OFFICER',cls:'hot',fn:()=>{document.body.classList.remove('siren');
+        modal('💸 BRIBE REJECTED','Fined 5 volume points for attempted bribery.');setVol(95)}}]);
+}
+
+/* ================= CHANGE PIPELINE ================= */
+// Every change passes through the gauntlet: police -> maybe confirm -> maybe fake loading -> apply.
+async function change(target){
+  if (busy) return; busy = true;
+  target = Math.max(0, Math.min(100, Math.round(target)));
+  if (target >= 100){ busy = false; render(); return police(); }
+  if (Math.random() < .3 && !(await confirmQ())){ log('Change denied by the speakers.'); busy = false; render(); return; }
+  if (Math.random() < .35) await loading();
+  setVol(target); busy = false;
+}
+
+/* ================= CONTROLS ================= */
+$('power').onclick = startAudio;
+$('up').onclick = () => change(vol + 5);
+$('down').onclick = () => change(vol - 5);
+$('mute').onclick = () => { muted = !muted; $('mute').textContent = muted ? '🔊 UNMUTE' : '🔇 MUTE'; log(muted?'Speakers gagged.':'Speakers un-gagged.'); render(); };
+$('reset').onclick = async () => { busy = true; await loading(); busy = false; muted = false; setVol(30); };
+$('lotto').onclick = () => { const v = rnd(0,100); log(`🎰 Lottery drew ${v}`); if (v === 100) police(); else setVol(v); };
+$('rev').onclick = () => { reversed = !reversed; $('rev').textContent = `⇄ REVERSE REALITY: ${reversed?'ON':'OFF'}`; $('rev').classList.toggle('on',reversed); log(reversed?'Physics inverted.':'Physics restored (allegedly).'); render(); };
+
+// Slider: input = live drag (runaway chance), change = release (goes through gauntlet)
+$('slider').addEventListener('input', e => {
+  if (Math.random() < .12){ // runaway slider!
+    e.target.value = rnd(0,100); log('Slider ran away. It has commitment issues.');
+    e.target.classList.add('shake'); setTimeout(()=>e.target.classList.remove('shake'),400);
+  }
+  const raw = +e.target.value, shown = reversed ? 100 - raw : raw;
+  $('pct').textContent = shown; // preview only
+});
+$('slider').addEventListener('change', e => { const raw = +e.target.value; change(reversed ? 100 - raw : raw); });
+
+/* ================= USELESS BUTTONS ================= */
+let sdCount = 0;
+$('dnc').onclick = e => {
+  const b = e.target; b.textContent = pick(['I SAID NO','WHY','OKAY NOW IT HURTS','STOP IT','CLICK AGAIN, COWARD']);
+  b.style.left = rnd(-40,40)+'px'; b.style.top = rnd(-10,10)+'px';
+  document.body.classList.add('shake'); setTimeout(()=>document.body.classList.remove('shake'),400);
+  log('User ignored a perfectly clear instruction.');
+};
+$('sd').onclick = () => { sdCount++; log(`SERIOUSLY DON'T clicked ${sdCount}x. Nothing happened. Congratulations.`); if (sdCount % 5 === 0) modal('🏆 ACHIEVEMENT',`You clicked it ${sdCount} times. Reward: nothing.`); };
+$('free').onclick = () => modal('🎁 FREE VOLUME','Complete 47 surveys, sign a blood-pact with the terms of service, and wait 6–8 business eternities.');
+$('louder').onclick = () => { setVol(vol+1); log('Made it louder. By 1%. You\'re welcome.'); };
+$('fix').onclick = () => {
+  log('Fixing everything... everything is now broken.');
+  document.body.classList.add('flip','invert');
+  setTimeout(()=>document.body.classList.remove('flip'),1800);
+  setTimeout(()=>{document.body.classList.remove('invert');modal('🔧 FIXED','Everything is fixed. Please ignore the upside-down.')},2400);
+};
+$('emerg').onclick = () => {
+  document.body.classList.add('siren'); siren(3); setVol(rnd(0,10));
+  log('🚨 EMERGENCY! Volume dropped to a calming level.');
+  setTimeout(()=>document.body.classList.remove('siren'),3000);
+  modal('🚨 EMERGENCY HANDLED','The emergency was: you. Volume reduced for everybody\'s safety.');
+};
+
+/* ================= FAKE STATUS LOOP ================= */
+setInterval(() => {
+  const c = rnd(20,99); $('cpu').style.width = c+'%'; $('cpuT').textContent = c+'%';
+  const base = muted ? 0 : vol; if (!ctx) { $('spl').style.width = $('spr').style.width = '0%'; return; }
+  $('spl').style.width = Math.min(100, base*rnd(5,10)/10+rnd(0,10))+'%';
+  $('spr').style.width = Math.min(100, base*rnd(5,10)/10+rnd(0,10))+'%';
+}, 400);
+setInterval(() => log(pick(['Reticulating splines...','Speakers whispering about you.','Defragmenting the decibels.','Sound waves unionising.','Checking if 30 is still 30...'])), 7000);
+
+render(); log('VOLUME.exe booted. Press POWER ON SPEAKERS to hear regret.');
 </script>
 </body>
 </html>
